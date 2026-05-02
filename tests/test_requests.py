@@ -1299,7 +1299,7 @@ class TestRequests:
         jar.set(key1, value1)
 
         d1 = dict(jar)
-        d2 = dict(jar.iteritems())
+        d2 = dict(jar.items())
         d3 = dict(jar.items())
 
         assert len(jar) == 2
@@ -1319,7 +1319,7 @@ class TestRequests:
         jar.set(key1, value1)
 
         d1 = dict(jar)
-        d2 = dict(jar.iteritems())
+        d2 = dict(jar.items())
         d3 = dict(jar.items())
 
         assert d1["some_cookie"] == "some_value"
@@ -2256,9 +2256,9 @@ class TestRequests:
         """
         url_final = httpbin("html")
         querystring_malformed = urlencode({"location": url_final})
-        url_redirect_malformed = httpbin("response-headers?%s" % querystring_malformed)
+        url_redirect_malformed = httpbin(f"response-headers?{querystring_malformed}")
         querystring_redirect = urlencode({"url": url_redirect_malformed})
-        url_redirect = httpbin("redirect-to?%s" % querystring_redirect)
+        url_redirect = httpbin(f"redirect-to?{querystring_redirect}")
         urls_test = [
             url_redirect,
             url_redirect_malformed,
