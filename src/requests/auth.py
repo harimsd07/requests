@@ -145,6 +145,7 @@ class HTTPDigestAuth(AuthBase):
             def md5_utf8(x):
                 if isinstance(x, str):
                     x = x.encode("utf-8")
+# ⚠️  LEGACYFIX: MD5 is cryptographically broken — Use hashlib.sha256() or hashlib.sha3_256()
                 return hashlib.md5(x, usedforsecurity=False).hexdigest()
 
             hash_utf8 = md5_utf8
@@ -153,6 +154,7 @@ class HTTPDigestAuth(AuthBase):
             def sha_utf8(x):
                 if isinstance(x, str):
                     x = x.encode("utf-8")
+# ⚠️  LEGACYFIX: SHA1 is cryptographically weak — Use hashlib.sha256() or hashlib.sha3_256()
                 return hashlib.sha1(x, usedforsecurity=False).hexdigest()
 
             hash_utf8 = sha_utf8
@@ -202,6 +204,7 @@ class HTTPDigestAuth(AuthBase):
         s += time.ctime().encode("utf-8")
         s += os.urandom(8)
 
+# ⚠️  LEGACYFIX: SHA1 is cryptographically weak — Use hashlib.sha256() or hashlib.sha3_256()
         cnonce = hashlib.sha1(s, usedforsecurity=False).hexdigest()[:16]
         if _algorithm == "MD5-SESS":
             HA1 = hash_utf8(f"{HA1}:{nonce}:{cnonce}")
