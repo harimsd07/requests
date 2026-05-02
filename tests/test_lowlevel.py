@@ -73,7 +73,7 @@ def test_chunked_upload_uses_only_specified_host_header():
         r = requests.post(url, data=data, headers={"Host": custom_host}, stream=True)
         close_server.set()  # release server block
 
-    expected_header = b"Host: %s\r\n" % custom_host.encode("utf-8")
+    expected_header = bf"Host: {custom_host}\r\n".encode("utf-8")
     assert expected_header in r.content
     assert r.content.count(b"Host: ") == 1
 
@@ -91,7 +91,7 @@ def test_chunked_upload_doesnt_skip_host_header():
         r = requests.post(url, data=data, stream=True)
         close_server.set()  # release server block
 
-    expected_header = b"Host: %s\r\n" % expected_host.encode("utf-8")
+    expected_header = bf"Host: {expected_host}\r\n".encode("utf-8")
     assert expected_header in r.content
     assert r.content.count(b"Host: ") == 1
 
