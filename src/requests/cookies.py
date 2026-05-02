@@ -237,7 +237,7 @@ class RequestsCookieJar(cookielib.CookieJar, MutableMapping):
 
         .. seealso:: values() and items().
         """
-        return list(self.iterkeys())
+        return list(self.keys())
 
     def itervalues(self):
         """Dict-like itervalues() that returns an iterator of values of cookies
@@ -254,7 +254,7 @@ class RequestsCookieJar(cookielib.CookieJar, MutableMapping):
 
         .. seealso:: keys() and items().
         """
-        return list(self.itervalues())
+        return list(self.values())
 
     def iteritems(self):
         """Dict-like iteritems() that returns an iterator of name-value tuples
@@ -272,7 +272,7 @@ class RequestsCookieJar(cookielib.CookieJar, MutableMapping):
 
         .. seealso:: keys() and values().
         """
-        return list(self.iteritems())
+        return list(self.items())
 
     def list_domains(self):
         """Utility method to list all the domains in the jar."""
